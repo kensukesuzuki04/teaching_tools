@@ -34,9 +34,7 @@
       </div>
 
       <div class="button-row">
-        <button id="applyBtn" type="button">Update Display</button>
-        <button id="startBtn" type="button">Start</button>
-        <button id="resetBtn" type="button">Reset</button>
+        <button id="completeBtn" type="button">Complete Setup</button>
       </div>
     </section>
 
@@ -44,17 +42,31 @@
       <h2 class="course-title" id="courseTitle">Course Number</h2>
       <figure class="chart-wrap">
         <img id="seatingChartImage" src="images/seating_chart.png" alt="Seating chart" />
-        <figcaption id="chartCaption">without door</figcaption>
       </figure>
       <article class="notice-box">
         <h3>Instructions</h3>
-        <p id="noticeText">Instructions will be displayed here.</p>
+        <p id="noticeText"></p>
       </article>
+      <div class="pre-exam-actions hidden" id="preExamActions">
+        <button id="backToSettingsBtn" type="button">Back to Settings</button>
+        <button id="startFromPreviewBtn" type="button">Start</button>
+      </div>
     </section>
 
     <section class="exam-view hidden" id="examView" aria-live="assertive">
-      <div class="current-time" id="currentTime">00:00:00</div>
+      <div class="current-time" id="currentTime">Current time: 00:00:00</div>
       <div class="timer" id="timerDisplay">120:00</div>
+      <article class="exam-notice-box">
+        <h3>Instructions</h3>
+        <p id="examNoticeText"></p>
+      </article>
+      <div class="exam-edit-wrap">
+        <button id="editInstructionsBtn" type="button">Edit Instructions</button>
+        <div class="exam-instruction-editor hidden" id="examInstructionEditor">
+          <textarea id="examNoticeInput" rows="4" placeholder="Update instructions while timer is running"></textarea>
+          <button id="saveExamInstructionsBtn" type="button">Save</button>
+        </div>
+      </div>
     </section>
   </main>
 

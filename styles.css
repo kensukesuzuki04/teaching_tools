@@ -1,11 +1,13 @@
 :root {
-  --bg-main: #f6f3ea;
-  --bg-accent: #d8e2dc;
-  --ink: #14213d;
-  --ink-soft: #33415c;
-  --panel: rgba(255, 255, 255, 0.86);
-  --line: #a4b494;
-  --alert: #b02e0c;
+  --bg-main: #f7f1f2;
+  --bg-accent: #f2dfe2;
+  --ink: #2a1016;
+  --ink-soft: #6f2b38;
+  --panel: rgba(255, 255, 255, 0.92);
+  --line: #bc5a6d;
+  --brand: #c41230;
+  --brand-dark: #930e24;
+  --alert: #b80f2c;
 }
 
 * {
@@ -17,8 +19,8 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: var(--ink);
   background:
-    radial-gradient(circle at 15% 15%, #edf2f4 0%, transparent 35%),
-    radial-gradient(circle at 85% 85%, #dce6d6 0%, transparent 40%),
+    radial-gradient(circle at 15% 15%, #ffe7eb 0%, transparent 35%),
+    radial-gradient(circle at 85% 85%, #f6d6dc 0%, transparent 40%),
     var(--bg-main);
   min-height: 100vh;
 }
@@ -66,7 +68,7 @@ body {
   display: inline-block;
   margin-top: 0.5rem;
   text-decoration: none;
-  background: var(--ink);
+  background: var(--brand-dark);
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 8px;
@@ -97,6 +99,7 @@ body {
 
 .top-nav button,
 .button-row button,
+.pre-exam-actions button,
 .control-panel input,
 .control-panel select,
 .control-panel textarea {
@@ -130,7 +133,7 @@ body {
 .control-panel select,
 .control-panel textarea {
   width: 100%;
-  border: 1px solid #9cae8c;
+  border: 1px solid #c57b89;
   border-radius: 8px;
   padding: 0.55rem;
 }
@@ -142,18 +145,30 @@ body {
 
 .button-row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
   gap: 0.5rem;
 }
 
 .button-row button,
+#preExamActions button,
 #fullscreenBtn {
   border: none;
   border-radius: 8px;
-  background: #2f5d50;
+  background: var(--brand);
   color: white;
   padding: 0.6rem;
   cursor: pointer;
+}
+
+#preExamActions button:first-child {
+  background: var(--brand-dark);
+}
+
+.pre-exam-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(180px, 260px));
+  justify-content: center;
+  gap: 0.6rem;
 }
 
 .pre-exam-view {
@@ -177,7 +192,6 @@ body {
   margin: 0;
   display: grid;
   place-items: center;
-  gap: 0.4rem;
 }
 
 .chart-wrap img {
@@ -197,14 +211,20 @@ body {
 }
 
 .notice-box h3 {
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.6rem;
+  font-size: clamp(1.3rem, 2.1vw, 2rem);
 }
 
 .notice-box p {
   margin: 0;
   white-space: pre-wrap;
   line-height: 1.4;
-  font-size: clamp(1rem, 1.6vw, 1.8rem);
+  min-height: 3rem;
+  font-size: clamp(1.3rem, 2.1vw, 2rem);
+}
+
+.exam-app.preview-only {
+  grid-template-columns: 1fr;
 }
 
 .exam-view {
@@ -221,17 +241,76 @@ body {
   position: absolute;
   top: 1rem;
   right: 1.2rem;
-  font-size: clamp(1.2rem, 2vw, 2.2rem);
+  font-size: clamp(1.5rem, 2.8vw, 3.2rem);
   font-weight: 700;
 }
 
 .timer {
-  font-size: clamp(5rem, 18vw, 16rem);
+  font-size: clamp(6rem, 22vw, 19rem);
   font-weight: 800;
   line-height: 1;
   letter-spacing: 0.03em;
   color: var(--alert);
   text-align: center;
+}
+
+.exam-notice-box {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  background: #ffffffde;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.7rem 0.9rem;
+}
+
+.exam-notice-box h3 {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.1rem, 1.8vw, 1.6rem);
+}
+
+.exam-notice-box p {
+  margin: 0;
+  white-space: pre-wrap;
+  font-size: clamp(1.1rem, 1.8vw, 1.6rem);
+}
+
+.exam-edit-wrap {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  width: min(420px, calc(100% - 2rem));
+}
+
+#editInstructionsBtn,
+#saveExamInstructionsBtn {
+  border: none;
+  border-radius: 8px;
+  background: var(--brand-dark);
+  color: white;
+  padding: 0.5rem 0.7rem;
+  cursor: pointer;
+}
+
+.exam-instruction-editor {
+  margin-top: 0.45rem;
+  display: grid;
+  gap: 0.45rem;
+  background: #ffffffea;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.55rem;
+}
+
+.exam-instruction-editor textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 90px;
+  border: 1px solid #c57b89;
+  border-radius: 8px;
+  padding: 0.5rem;
+  font: inherit;
 }
 
 .hidden {
@@ -248,6 +327,10 @@ body {
   }
 
   .button-row {
+    grid-template-columns: 1fr;
+  }
+
+  .pre-exam-actions {
     grid-template-columns: 1fr;
   }
 }

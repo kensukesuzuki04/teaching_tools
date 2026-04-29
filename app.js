@@ -5,19 +5,25 @@ const durationInput = document.getElementById("durationInput");
 
 const courseTitle = document.getElementById("courseTitle");
 const seatingChartImage = document.getElementById("seatingChartImage");
-const chartCaption = document.getElementById("chartCaption");
 const noticeText = document.getElementById("noticeText");
 
-const applyBtn = document.getElementById("applyBtn");
-const startBtn = document.getElementById("startBtn");
-const resetBtn = document.getElementById("resetBtn");
+const completeBtn = document.getElementById("completeBtn");
+const backToSettingsBtn = document.getElementById("backToSettingsBtn");
+const startFromPreviewBtn = document.getElementById("startFromPreviewBtn");
 const fullscreenBtn = document.getElementById("fullscreenBtn");
 
+const examApp = document.getElementById("examApp");
 const controlPanel = document.getElementById("controlPanel");
 const preExamView = document.getElementById("preExamView");
+const preExamActions = document.getElementById("preExamActions");
 const examView = document.getElementById("examView");
 const timerDisplay = document.getElementById("timerDisplay");
 const currentTime = document.getElementById("currentTime");
+const examNoticeText = document.getElementById("examNoticeText");
+const editInstructionsBtn = document.getElementById("editInstructionsBtn");
+const examInstructionEditor = document.getElementById("examInstructionEditor");
+const examNoticeInput = document.getElementById("examNoticeInput");
+const saveExamInstructionsBtn = document.getElementById("saveExamInstructionsBtn");
 
 const chartMap = {
   "without-door": {
@@ -49,16 +55,34 @@ function formatClock(now) {
   });
 }
 
+function formatCurrentTimeLabel(now) {
+  return `Current time: ${formatClock(now)}`;
+}
+
 function applyPreview() {
   const course = courseInput.value.trim();
   const notice = noticeInput.value.trim();
   const selectedChart = chartMap[chartVersion.value];
 
   courseTitle.textContent = course || "Course Number";
-  noticeText.textContent = notice || "Instructions will be displayed here.";
+  noticeText.textContent = notice;
+  examNoticeText.textContent = notice;
+  examNoticeInput.value = notice;
 
   seatingChartImage.src = selectedChart.src;
-  chartCaption.textContent = selectedChart.label;
+}
+
+function showPreviewOnly() {
+  applyPreview();
+  controlPanel.classList.add("hidden");
+  preExamActions.classList.remove("hidden");
+  examApp.classList.add("preview-only");
+}
+
+function showSettings() {
+  controlPanel.classList.remove("hidden");
+  preExamActions.classList.add("hidden");
+  examApp.classList.remove("preview-only");
 }
 
 function stopIntervals() {
@@ -84,15 +108,17 @@ function startExam() {
 
   preExamView.classList.add("hidden");
   controlPanel.classList.add("hidden");
+  preExamActions.classList.add("hidden");
+  examApp.classList.add("preview-only");
   examView.classList.remove("hidden");
 
   timerDisplay.textContent = formatHMS(remainingSeconds);
-  currentTime.textContent = formatClock(new Date());
+  currentTime.textContent = formatCurrentTimeLabel(new Date());
 
   stopIntervals();
 
   wallClockInterval = setInterval(() => {
-    currentTime.textContent = formatClock(new Date());
+    currentTime.textContent = formatCurrentTimeLabel(new Date());
   }, 1000);
 
   countdownInterval = setInterval(() => {
@@ -111,8 +137,20 @@ function resetToPreExam() {
   stopIntervals();
   examView.classList.add("hidden");
   preExamView.classList.remove("hidden");
-  controlPanel.classList.remove("hidden");
-  applyPreview();
+  examInstructionEditor.classList.add("hidden");
+  showSettings();
+}
+
+function toggleExamInstructionEditor() {
+  examInstructionEditor.classList.toggle("hidden");
+}
+
+function saveExamInstructions() {
+  const updatedNotice = examNoticeInput.value.trim();
+  noticeInput.value = updatedNotice;
+  noticeText.textContent = updatedNotice;
+  examNoticeText.textContent = updatedNotice;
+  examInstructionEditor.classList.add("hidden");
 }
 
 function enterFullscreen() {
@@ -122,10 +160,12 @@ function enterFullscreen() {
   }
 }
 
-applyBtn.addEventListener("click", applyPreview);
-startBtn.addEventListener("click", startExam);
-resetBtn.addEventListener("click", resetToPreExam);
+completeBtn.addEventListener("click", showPreviewOnly);
+backToSettingsBtn.addEventListener("click", showSettings);
+startFromPreviewBtn.addEventListener("click", startExam);
 chartVersion.addEventListener("change", applyPreview);
 fullscreenBtn.addEventListener("click", enterFullscreen);
+editInstructionsBtn.addEventListener("click", toggleExamInstructionEditor);
+saveExamInstructionsBtn.addEventListener("click", saveExamInstructions);
 
 applyPreview();
