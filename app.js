@@ -55,7 +55,7 @@ function applyPreview() {
   const selectedChart = chartMap[chartVersion.value];
 
   courseTitle.textContent = course || "Course Number";
-  noticeText.textContent = notice || "ここに注意事項が表示されます。";
+  noticeText.textContent = notice || "Instructions will be displayed here.";
 
   seatingChartImage.src = selectedChart.src;
   chartCaption.textContent = selectedChart.label;
@@ -75,7 +75,7 @@ function stopIntervals() {
 function startExam() {
   const durationMinutes = Number(durationInput.value);
   if (!Number.isFinite(durationMinutes) || durationMinutes < 1) {
-    alert("試験時間（分）を1以上で入力してください。");
+    alert("Please enter an exam duration of at least 1 minute.");
     return;
   }
 
