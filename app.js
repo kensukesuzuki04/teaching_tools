@@ -28,12 +28,19 @@ const saveExamInstructionsBtn = document.getElementById("saveExamInstructionsBtn
 
 const chartMap = {
   "without-door": {
-    src: "images/seating_chart.png",
-    label: "without door"
+    src: "images/seating_chart.png"
   },
-  "with-door": {
-    src: "images/seating_chart_door_right.png",
-    label: "with door on right"
+  "with-door-right": {
+    src: "images/seating_chart_door_right.png"
+  },
+  "with-door-left": {
+    src: "images/seating_chart_door_left.png"
+  },
+  "with-door-back-center": {
+    src: "images/seating_chart_door_back_center.png"
+  },
+  "with-door-back-left": {
+    src: "images/seating_chart_door_back_left.png"
   }
 };
 
