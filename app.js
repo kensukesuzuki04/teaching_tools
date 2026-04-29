@@ -25,7 +25,7 @@ const chartMap = {
     label: "without door"
   },
   "with-door": {
-    src: "images/seating_chart_door.png",
+    src: "images/seating_chart_door_right.png",
     label: "with door on right"
   }
 };
