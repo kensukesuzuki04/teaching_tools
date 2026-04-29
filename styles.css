@@ -1,0 +1,253 @@
+:root {
+  --bg-main: #f6f3ea;
+  --bg-accent: #d8e2dc;
+  --ink: #14213d;
+  --ink-soft: #33415c;
+  --panel: rgba(255, 255, 255, 0.86);
+  --line: #a4b494;
+  --alert: #b02e0c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 15% 15%, #edf2f4 0%, transparent 35%),
+    radial-gradient(circle at 85% 85%, #dce6d6 0%, transparent 40%),
+    var(--bg-main);
+  min-height: 100vh;
+}
+
+.home-body {
+  display: grid;
+  place-items: center;
+  padding: 2rem 1rem;
+}
+
+.home-main {
+  width: min(900px, 95vw);
+}
+
+.home-header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 3.4vw, 3rem);
+}
+
+.home-header p {
+  margin: 0.5rem 0 0;
+  color: var(--ink-soft);
+}
+
+.tool-grid {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.tool-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.25rem;
+  backdrop-filter: blur(4px);
+}
+
+.tool-card h2 {
+  margin-top: 0;
+}
+
+.tool-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  text-decoration: none;
+  background: var(--ink);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+.placeholder-card {
+  opacity: 0.7;
+}
+
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.88);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.top-nav a {
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.top-nav button,
+.button-row button,
+.control-panel input,
+.control-panel select,
+.control-panel textarea {
+  font: inherit;
+}
+
+.exam-app {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) 1fr;
+  gap: 1rem;
+  min-height: calc(100vh - 60px);
+}
+
+.control-panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1rem;
+  display: grid;
+  gap: 0.6rem;
+  align-content: start;
+}
+
+.control-panel h1 {
+  margin: 0 0 0.5rem;
+  font-size: 1.4rem;
+}
+
+.control-panel input,
+.control-panel select,
+.control-panel textarea {
+  width: 100%;
+  border: 1px solid #9cae8c;
+  border-radius: 8px;
+  padding: 0.55rem;
+}
+
+.time-row {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.button-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.button-row button,
+#fullscreenBtn {
+  border: none;
+  border-radius: 8px;
+  background: #2f5d50;
+  color: white;
+  padding: 0.6rem;
+  cursor: pointer;
+}
+
+.pre-exam-view {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1rem;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 0.7rem;
+  min-height: 70vh;
+}
+
+.course-title {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(1.8rem, 3vw, 3rem);
+}
+
+.chart-wrap {
+  margin: 0;
+  display: grid;
+  place-items: center;
+  gap: 0.4rem;
+}
+
+.chart-wrap img {
+  max-width: 100%;
+  max-height: 48vh;
+  object-fit: contain;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: white;
+}
+
+.notice-box {
+  background: #ffffffcc;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.8rem;
+}
+
+.notice-box h3 {
+  margin: 0 0 0.5rem;
+}
+
+.notice-box p {
+  margin: 0;
+  white-space: pre-wrap;
+  line-height: 1.4;
+  font-size: clamp(1rem, 1.6vw, 1.8rem);
+}
+
+.exam-view {
+  position: relative;
+  min-height: 80vh;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.75);
+  display: grid;
+  place-items: center;
+}
+
+.current-time {
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  font-size: clamp(1.2rem, 2vw, 2.2rem);
+  font-weight: 700;
+}
+
+.timer {
+  font-size: clamp(5rem, 18vw, 16rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.03em;
+  color: var(--alert);
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .exam-app {
+    grid-template-columns: 1fr;
+  }
+
+  .pre-exam-view {
+    min-height: 55vh;
+  }
+
+  .button-row {
+    grid-template-columns: 1fr;
+  }
+}

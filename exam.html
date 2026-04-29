@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>試験管理ツール</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top-nav">
+    <a href="index.html">Teaching Tools Top</a>
+    <button id="fullscreenBtn" type="button">全画面表示</button>
+  </header>
+
+  <main class="exam-app" id="examApp">
+    <section class="control-panel" id="controlPanel">
+      <h1>試験管理ツール</h1>
+
+      <label for="courseInput">Course Number</label>
+      <input id="courseInput" type="text" placeholder="例: ECON 101" />
+
+      <label for="chartVersion">Seating Chart Version</label>
+      <select id="chartVersion">
+        <option value="without-door">without door</option>
+        <option value="with-door">with door on right</option>
+      </select>
+
+      <label for="noticeInput">注意事項</label>
+      <textarea id="noticeInput" rows="6" placeholder="試験前に表示する注意事項を入力"></textarea>
+
+      <div class="time-row">
+        <label for="durationInput">試験時間（分）</label>
+        <input id="durationInput" type="number" min="1" value="120" />
+      </div>
+
+      <div class="button-row">
+        <button id="applyBtn" type="button">表示を更新</button>
+        <button id="startBtn" type="button">スタート</button>
+        <button id="resetBtn" type="button">リセット</button>
+      </div>
+    </section>
+
+    <section class="pre-exam-view" id="preExamView" aria-live="polite">
+      <h2 class="course-title" id="courseTitle">Course Number</h2>
+      <figure class="chart-wrap">
+        <img id="seatingChartImage" src="images/seating_chart.png" alt="Seating chart" />
+        <figcaption id="chartCaption">without door</figcaption>
+      </figure>
+      <article class="notice-box">
+        <h3>注意事項</h3>
+        <p id="noticeText">ここに注意事項が表示されます。</p>
+      </article>
+    </section>
+
+    <section class="exam-view hidden" id="examView" aria-live="assertive">
+      <div class="current-time" id="currentTime">00:00:00</div>
+      <div class="timer" id="timerDisplay">120:00</div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
