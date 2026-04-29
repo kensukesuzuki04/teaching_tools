@@ -245,6 +245,15 @@ body {
   font-weight: 700;
 }
 
+.end-time {
+  position: absolute;
+  top: clamp(3.5rem, 5.2vw, 5.4rem);
+  right: 1.2rem;
+  font-size: clamp(1.3rem, 2.2vw, 2.4rem);
+  font-weight: 800;
+  color: var(--alert);
+}
+
 .timer {
   font-size: clamp(6rem, 22vw, 19rem);
   font-weight: 800;

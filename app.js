@@ -19,6 +19,7 @@ const preExamActions = document.getElementById("preExamActions");
 const examView = document.getElementById("examView");
 const timerDisplay = document.getElementById("timerDisplay");
 const currentTime = document.getElementById("currentTime");
+const endTime = document.getElementById("endTime");
 const examNoticeText = document.getElementById("examNoticeText");
 const editInstructionsBtn = document.getElementById("editInstructionsBtn");
 const examInstructionEditor = document.getElementById("examInstructionEditor");
@@ -57,6 +58,10 @@ function formatClock(now) {
 
 function formatCurrentTimeLabel(now) {
   return `Current time: ${formatClock(now)}`;
+}
+
+function formatEndTimeLabel(endAt) {
+  return `Exam end time: ${formatClock(endAt)}`;
 }
 
 function applyPreview() {
@@ -112,8 +117,12 @@ function startExam() {
   examApp.classList.add("preview-only");
   examView.classList.remove("hidden");
 
+  const now = new Date();
+  const endAt = new Date(now.getTime() + remainingSeconds * 1000);
+
   timerDisplay.textContent = formatHMS(remainingSeconds);
-  currentTime.textContent = formatCurrentTimeLabel(new Date());
+  currentTime.textContent = formatCurrentTimeLabel(now);
+  endTime.textContent = formatEndTimeLabel(endAt);
 
   stopIntervals();
 
