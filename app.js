@@ -48,10 +48,20 @@ let countdownInterval = null;
 let wallClockInterval = null;
 let remainingSeconds = 120 * 60;
 
-function formatHMS(totalSeconds) {
-  const minutes = Math.floor(totalSeconds / 60);
+function formatTimerParts(totalSeconds) {
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
   const seconds = totalSeconds % 60;
-  return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+  return {
+    hh: String(hours).padStart(2, "0"),
+    mm: String(minutes).padStart(2, "0"),
+    ss: String(seconds).padStart(2, "0")
+  };
+}
+
+function renderTimer(totalSeconds) {
+  const parts = formatTimerParts(totalSeconds);
+  timerDisplay.innerHTML = `<span class="timer-main">${parts.hh}:${parts.mm}</span><span class="timer-seconds">${parts.ss}</span>`;
 }
 
 function formatClock(now) {
@@ -127,7 +137,7 @@ function startExam() {
   const now = new Date();
   const endAt = new Date(now.getTime() + remainingSeconds * 1000);
 
-  timerDisplay.textContent = formatHMS(remainingSeconds);
+  renderTimer(remainingSeconds);
   currentTime.textContent = formatCurrentTimeLabel(now);
   endTime.textContent = formatEndTimeLabel(endAt);
 
@@ -141,11 +151,11 @@ function startExam() {
     remainingSeconds -= 1;
     if (remainingSeconds <= 0) {
       remainingSeconds = 0;
-      timerDisplay.textContent = formatHMS(remainingSeconds);
+      renderTimer(remainingSeconds);
       stopIntervals();
       return;
     }
-    timerDisplay.textContent = formatHMS(remainingSeconds);
+    renderTimer(remainingSeconds);
   }, 1000);
 }
 

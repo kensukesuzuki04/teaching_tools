@@ -255,12 +255,29 @@ body {
 }
 
 .timer {
-  font-size: clamp(6rem, 22vw, 19rem);
-  font-weight: 800;
+  font-size: clamp(4.6rem, 15vw, 12.5rem);
+  font-weight: 700;
   line-height: 1;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.015em;
   color: var(--alert);
   text-align: center;
+  display: inline-block;
+  position: relative;
+  padding-right: 0.52em;
+}
+
+.timer-main {
+  font-size: 1em;
+}
+
+.timer-seconds {
+  position: absolute;
+  right: 0;
+  bottom: -0.04em;
+  font-size: 0.3em;
+  line-height: 1;
+  font-weight: 700;
+  opacity: 0.9;
 }
 
 .exam-notice-box {
